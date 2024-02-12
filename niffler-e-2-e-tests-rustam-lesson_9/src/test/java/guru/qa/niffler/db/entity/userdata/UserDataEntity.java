@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 
 @Entity
-@Table(name = "users")
+@Table(name = "\"user\"")
 public class UserDataEntity {
 
   @Id

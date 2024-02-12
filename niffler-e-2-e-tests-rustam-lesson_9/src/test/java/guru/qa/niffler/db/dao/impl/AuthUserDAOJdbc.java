@@ -33,11 +33,11 @@ public class AuthUserDAOJdbc implements AuthUserDAO, UserDataUserDAO {
       conn.setAutoCommit(false);
 
       try (PreparedStatement usersPs = conn.prepareStatement(
-          "INSERT INTO users (username, password, enabled, account_non_expired, account_non_locked, credentials_non_expired) " +
+          "INSERT INTO \"user\" (username, password, enabled, account_non_expired, account_non_locked, credentials_non_expired) " +
               "VALUES (?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS); // ожидаем получить сгенеренный ключ (2 параметр)
 
           PreparedStatement authorityPs = conn.prepareStatement(
-          "INSERT INTO authorities (user_id, authority) VALUES (?, ?)")) {
+          "INSERT INTO authority (user_id, authority) VALUES (?, ?)")) {
 
         usersPs.setString(1, user.getUsername());
         usersPs.setString(2, pe.encode(user.getPassword()));
@@ -83,7 +83,7 @@ public class AuthUserDAOJdbc implements AuthUserDAO, UserDataUserDAO {
     UserEntity user = new UserEntity();
     try (Connection conn = authDs.getConnection();
         PreparedStatement userPs = conn.prepareStatement(
-          "SELECT * FROM users WHERE id = ?"
+          "SELECT * FROM \"user\" WHERE id = ?"
       )) {
         userPs.setObject(1, user.getId());
         ResultSet resultSet = userPs.executeQuery();
@@ -108,7 +108,7 @@ public class AuthUserDAOJdbc implements AuthUserDAO, UserDataUserDAO {
 
     try (Connection conn = authDs.getConnection();
       PreparedStatement usersPs = conn.prepareStatement(
-          "UPDATE users SET(password, enabled, account_non_expired, "
+          "UPDATE \"user\" SET(password, enabled, account_non_expired, "
               + "account_non_locked, credentials_non_expired) = (?, ?, ?, ?, ?) WHERE id = ?")
     ) {
         usersPs.setString(1, pe.encode(user.getPassword()));
@@ -134,10 +134,10 @@ public class AuthUserDAOJdbc implements AuthUserDAO, UserDataUserDAO {
 
       try (
           PreparedStatement authPs = conn.prepareStatement(
-          "DELETE FROM authorities WHERE user_id = ?");
+          "DELETE FROM authority WHERE user_id = ?");
 
           PreparedStatement usersPs = conn.prepareStatement(
-          "DELETE FROM users WHERE id = ?");
+          "DELETE FROM \"user\" WHERE id = ?");
       ) {
 
         authPs.setObject(1, user.getId());
@@ -161,7 +161,7 @@ public class AuthUserDAOJdbc implements AuthUserDAO, UserDataUserDAO {
     int createdRows = 0;
     try (Connection conn = userdataDs.getConnection();
         PreparedStatement usersPs = conn.prepareStatement(
-          "INSERT INTO users (username, currency) VALUES (?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)
+          "INSERT INTO \"user\" (username, currency) VALUES (?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)
       ) {
         usersPs.setString(1, userData.getUsername());
         usersPs.setString(2, CurrencyValues.RUB.name());
@@ -178,7 +178,7 @@ public class AuthUserDAOJdbc implements AuthUserDAO, UserDataUserDAO {
     UserDataEntity userdata = new UserDataEntity();
     try (Connection conn = userdataDs.getConnection();
         PreparedStatement userPs = conn.prepareStatement(
-            "SELECT * FROM users WHERE username = ?"
+            "SELECT * FROM \"user\" WHERE username = ?"
         )) {
       userPs.setObject(1, userData.getUsername());
       ResultSet resultSet = userPs.executeQuery();
@@ -202,7 +202,7 @@ public class AuthUserDAOJdbc implements AuthUserDAO, UserDataUserDAO {
     UserDataEntity userdata = new UserDataEntity();
     try (Connection conn = userdataDs.getConnection();
         PreparedStatement userPs = conn.prepareStatement(
-            "SELECT * FROM users WHERE username = ?"
+            "SELECT * FROM \"user\" WHERE username = ?"
         )) {
       userPs.setObject(1, username);
       ResultSet resultSet = userPs.executeQuery();
@@ -226,7 +226,7 @@ public class AuthUserDAOJdbc implements AuthUserDAO, UserDataUserDAO {
 
     try (Connection conn = userdataDs.getConnection();
         PreparedStatement userdataPs = conn.prepareStatement(
-            "UPDATE users SET (currency, firstname, surname, photo) = (?, ?, ?, ?) WHERE username = ?")) {
+            "UPDATE \"user\" SET (currency, firstname, surname, photo) = (?, ?, ?, ?) WHERE username = ?")) {
 
       ClassLoader classLoader = getClass().getClassLoader();
       byte[] fileContent = FileUtils.readFileToByteArray(new File(classLoader
@@ -255,7 +255,7 @@ public class AuthUserDAOJdbc implements AuthUserDAO, UserDataUserDAO {
 
     try (Connection connUserdata = userdataDs.getConnection();
         PreparedStatement userdataPS = connUserdata.prepareStatement(
-          "DELETE FROM users WHERE id = ?");
+          "DELETE FROM \"user\" WHERE id = ?");
       ) {
         userdataPS.setObject(1, userId);
         userdataPS.executeUpdate();
@@ -270,7 +270,7 @@ public class AuthUserDAOJdbc implements AuthUserDAO, UserDataUserDAO {
 
     try (Connection connUserdata = userdataDs.getConnection();
         PreparedStatement userdataPS = connUserdata.prepareStatement(
-          "DELETE FROM users WHERE username = ?");
+          "DELETE FROM \"user\" WHERE username = ?");
       ) {
         userdataPS.setString(1, userData.getUsername());
         userdataPS.executeUpdate();

@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "friends")
+@Table(name = "friendship")
 @IdClass(FriendsId.class)
 public class FriendsEntity {
 
