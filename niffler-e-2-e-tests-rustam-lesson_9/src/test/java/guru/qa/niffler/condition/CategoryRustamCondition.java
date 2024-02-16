@@ -1,13 +1,9 @@
 package guru.qa.niffler.condition;
 
-import com.codeborne.selenide.CheckResult;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ex.ElementNotFound;
 import com.codeborne.selenide.impl.CollectionSource;
-import guru.qa.niffler.db.entity.userdata.CurrencyValues;
-import guru.qa.niffler.model.CategoryJson;
-import guru.qa.niffler.model.Spend7Json;
-import guru.qa.niffler.utils.DateUtils;
+import guru.qa.niffler.model.Category9Json;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +13,7 @@ import org.openqa.selenium.WebElement;
 
 public class CategoryRustamCondition {
 
-  public static CollectionCondition category(CategoryJson... expectedCategory) {
+  public static CollectionCondition category(Category9Json... expectedCategory) {
     return new CollectionCondition() {
 
       @Override
@@ -42,7 +38,7 @@ public class CategoryRustamCondition {
 
         for (int i = 0; i < expectedCategory.length; i++) {
           WebElement row = elements.get(i);
-          CategoryJson expectedCat = expectedCategory[i];
+          Category9Json expectedCat = expectedCategory[i];
           List<WebElement> calls = row.findElements(By.cssSelector("td"));
 
           if (!calls.get(4).getText().equals(expectedCat.getCategory())) {
@@ -60,11 +56,11 @@ public class CategoryRustamCondition {
         return false;
       }
 
-      private List<CategoryJson> bindElementsToCategories(List<WebElement> elements) {
+      private List<Category9Json> bindElementsToCategories(List<WebElement> elements) {
         return elements.stream()
             .map(e -> {
               List<WebElement> cells = e.findElements(By.cssSelector("td"));
-              CategoryJson actual = new CategoryJson();
+              Category9Json actual = new Category9Json();
 //              actual.setUsername(cells.get(5).getText());
               actual.setCategory(cells.get(4).getText());
               return actual;

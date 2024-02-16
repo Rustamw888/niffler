@@ -4,12 +4,12 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-import guru.qa.niffler.db.dao.AuthUserDAO;
-import guru.qa.niffler.db.dao.UserDataUserDAO;
+import guru.qa.niffler.db.dao.AuthUser9DAO;
+import guru.qa.niffler.db.dao.UserDataUser9DAO;
 import guru.qa.niffler.db.entity.auth.UserEntity;
-import guru.qa.niffler.jupiter.annotation.DAO;
-import guru.qa.niffler.jupiter.annotation.GenerateUser;
-import guru.qa.niffler.jupiter.extension.DaoExtension;
+import guru.qa.niffler.jupiter.annotation.old.DAO;
+import guru.qa.niffler.jupiter.annotation.old.GenerateUser;
+import guru.qa.niffler.jupiter.extension.old.DaoExtension;
 import guru.qa.niffler.test.web.BaseWebTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,9 +18,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 public class LoginTestLesson9Part1 extends BaseWebTest {
 
     @DAO
-    private AuthUserDAO authUserDAO;
+    private AuthUser9DAO authUser9DAO;
     @DAO
-    private UserDataUserDAO userDataUserDAO;
+    private UserDataUser9DAO userDataUser9DAO;
 
     @GenerateUser()
     @Test

@@ -1,7 +1,7 @@
 package guru.qa.niffler.test.web.other;
 
 import guru.qa.niffler.db.logging.JsonAttachment;
-import guru.qa.niffler.model.Spend7Json;
+import guru.qa.niffler.model.Spend9Json;
 import guru.qa.niffler.test.web.BaseWebTest;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
@@ -66,7 +66,7 @@ public class LessonTestRustam extends BaseWebTest {
       JSONObject object = (JSONObject) jsonParser.parse(reader);
       jsonAttachment = new JsonAttachment(
           "JSON",
-          new Spend7Json(
+          new Spend9Json(
           object.getAsString("spendDate"),
           object.getAsString("category"),
           object.getAsString("currency"),

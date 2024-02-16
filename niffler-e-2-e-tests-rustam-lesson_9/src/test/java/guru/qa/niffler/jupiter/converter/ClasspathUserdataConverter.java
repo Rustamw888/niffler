@@ -1,7 +1,7 @@
 package guru.qa.niffler.jupiter.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import guru.qa.niffler.model.UserJson;
+import guru.qa.niffler.model.User9Json;
 import java.io.IOException;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.params.converter.ArgumentConversionException;
@@ -13,11 +13,11 @@ public class ClasspathUserdataConverter implements ArgumentConverter {
   private ClassLoader cl = ClasspathUserdataConverter.class.getClassLoader();
 
   @Override
-  public UserJson convert(Object source, ParameterContext context)
+  public User9Json convert(Object source, ParameterContext context)
       throws ArgumentConversionException {
     if (source instanceof String stringSource) {
       try {
-        return om.readValue(cl.getResourceAsStream(stringSource), UserJson.class);
+        return om.readValue(cl.getResourceAsStream(stringSource), User9Json.class);
       } catch (IOException e) {
         throw new ArgumentConversionException(e.getMessage());
       }

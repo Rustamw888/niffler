@@ -25,7 +25,7 @@ create table if not exists "authority"
     constraint fk_authorities_users foreign key (user_id) references "user" (id)
 );
 
-alter table authority
+alter table "authority"
     owner to postgres;
 
-create unique index if not exists ix_auth_username on authority (user_id, authority);
+create unique index if not exists ix_auth_username on "authority" (user_id, authority);

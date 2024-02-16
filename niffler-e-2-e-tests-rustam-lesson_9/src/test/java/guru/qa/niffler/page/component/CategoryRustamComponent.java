@@ -2,12 +2,8 @@ package guru.qa.niffler.page.component;
 
 import static com.codeborne.selenide.Selenide.$;
 import static guru.qa.niffler.condition.CategoryRustamCondition.category;
-import static guru.qa.niffler.condition.SpendRustamCondition.spends;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
-import guru.qa.niffler.model.CategoryJson;
-import guru.qa.niffler.model.Spend7Json;
+import guru.qa.niffler.model.Category9Json;
 import io.qameta.allure.Step;
 
 public class CategoryRustamComponent extends BaseComponentRustam<CategoryRustamComponent> {
@@ -17,7 +13,7 @@ public class CategoryRustamComponent extends BaseComponentRustam<CategoryRustamC
     }
 
     @Step("Check that table contains data {0}")
-    public CategoryRustamComponent checkTableContainsCategory(CategoryJson... expectedCategory) {
+    public CategoryRustamComponent checkTableContainsCategory(Category9Json... expectedCategory) {
         self.$$("tbody tr").should(category(expectedCategory));
         return this;
     }

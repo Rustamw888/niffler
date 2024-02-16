@@ -1,15 +1,14 @@
 package guru.qa.niffler.db.logging;
 
-import guru.qa.niffler.model.Spend7Json;
+import guru.qa.niffler.model.Spend9Json;
 import io.qameta.allure.attachment.AttachmentData;
-import java.io.InputStream;
 
 public class JsonAttachment implements AttachmentData {
 
   private final String name;
-  private final Spend7Json text;
+  private final Spend9Json text;
 
-  public JsonAttachment(String name, Spend7Json text) {
+  public JsonAttachment(String name, Spend9Json text) {
     this.name = name;
     this.text = text;
   }
@@ -19,7 +18,7 @@ public class JsonAttachment implements AttachmentData {
     return name;
   }
 
-  public Spend7Json getText() {
+  public Spend9Json getText() {
     return text;
   }
 

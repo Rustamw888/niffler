@@ -4,7 +4,7 @@ import com.google.protobuf.Empty;
 import guru.qa.grpc.niffler.grpc.NifflerCurrencyServiceGrpc;
 import guru.qa.grpc.niffler.grpc.NifflerCurrencyServiceGrpc.NifflerCurrencyServiceBlockingStub;
 import guru.qa.niffler.config.Config;
-import guru.qa.niffler.jupiter.annotation.GrpcTest;
+import guru.qa.niffler.jupiter.annotation.old.GrpcTest;
 import io.grpc.Channel;
 import io.grpc.ManagedChannelBuilder;
 import io.qameta.allure.grpc.AllureGrpc;

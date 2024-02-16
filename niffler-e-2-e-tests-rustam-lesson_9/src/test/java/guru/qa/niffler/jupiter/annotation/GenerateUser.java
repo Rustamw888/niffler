@@ -1,15 +1,19 @@
 package guru.qa.niffler.jupiter.annotation;
 
-import guru.qa.niffler.jupiter.extension.RandomUsersExtension;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@ExtendWith(RandomUsersExtension.class)
+@Target({ElementType.PARAMETER, ElementType.METHOD})
 public @interface GenerateUser {
 
+  boolean handleAnnotation() default true;
+
+  Friend friends() default @Friend(handleAnnotation = false);
+
+  IncomeInvitation incomeInvitations() default @IncomeInvitation(handleAnnotation = false);
+
+  OutcomeInvitation outcomeInvitations() default @OutcomeInvitation(handleAnnotation = false);
 }

@@ -1,7 +1,5 @@
 package guru.qa.niffler.db.jpa;
 
-import com.p6spy.engine.spy.P6SpyDriver;
-import com.p6spy.engine.spy.P6SpyFactory;
 import guru.qa.niffler.config.Config;
 import guru.qa.niffler.db.ServiceDB;
 import jakarta.persistence.EntityManagerFactory;
@@ -42,7 +40,7 @@ public enum EntityManagerFactoryProvider {
 
   }
 
-  public Collection<EntityManagerFactory> storedEmf() {
+  public Collection<EntityManagerFactory> allStoredEntityManagerFactories() {
     return entityManagerFactory.values();
   }
 }

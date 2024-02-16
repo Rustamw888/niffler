@@ -7,37 +7,21 @@ import org.junit.jupiter.api.extension.ExtensionContext.Store.CloseableResource;
 
 public interface SuiteExtension extends BeforeAllCallback {
 
-    default void beforeSuite() {};
+  @Override
+  default void beforeAll(ExtensionContext extensionContext) throws Exception {
+    extensionContext.getRoot().getStore(Namespace.GLOBAL)
+        .getOrComputeIfAbsent(this.getClass(), k -> {
+          beforeAllTests(extensionContext);
+          return new CloseableResource() {
+            @Override
+            public void close() throws Throwable {
+              afterAllTests();
+            }
+          };
+        });
+  }
 
-    default void afterSuite() {};
+  default void beforeAllTests(ExtensionContext extensionContext) {}
 
-    @Override
-    default void beforeAll(ExtensionContext context) throws Exception {
-        context.getRoot().getStore(Namespace.GLOBAL)
-              .getOrComputeIfAbsent(
-                    SuiteExtension.class,
-                    k -> {
-                        beforeSuite();
-                        return (CloseableResource) this::afterSuite;
-              }
-        );
-    }
-
-//    @Override
-//    default void beforeAll(ExtensionContext context) throws Exception {
-//        context.getRoot().getStore(Namespace.GLOBAL).getOrComputeIfAbsent(
-//              SuiteExtension.class, new Function<Class<SuiteExtension>, ExtensionContext.Store.CloseableResource>() {
-//                  @Override
-//                  public ExtensionContext.Store.CloseableResource apply(Class<SuiteExtension> suiteExtensionClass) {
-//                      beforeSuite();
-//                      return new ExtensionContext.Store.CloseableResource() {
-//                          @Override
-//                          public void close() throws Throwable {
-//                              afterSuite();
-//                          }
-//                      };
-//                  }
-//              }
-//        );
-//    }
+  default void afterAllTests() {}
 }
